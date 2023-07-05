@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Reserva | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reserva/reserva.css' %}" type="text/css">
+<!-- Incluye jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Incluye jQuery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- Estilos CSS de jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+{% block container %}
+
+{% if form.errors %}
+<div class="error-messages">
+    <h3>Error:</h3>
+    <ul>
+        {% for field in form %}
+        {% if field.errors %}
+        <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<div class="card">
+    <h2>Información de la Agenda</h2>
+    <p>Cancha: N°{{ agenda.cancha.numeracion }}</p>
+    <p>Horario: {{ agenda.horario }}</p>
+    <p>Precio: ${{ agenda.cancha.tipo.precio }}</p>
+    {% comment %} <p>Disponible: {% if agenda.disponible %}Sí{% else %}No{% endif %}</p> {% endcomment %}
+    <form method="post" class="reserva-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.dia.id_for_label }}">Día: <i class="far fa-calendar-alt"><span> (Presiona aqui para
+                        elegir el dia)</span></i><br>{{ form.dia }}</label>
+        </div>
+        <input type="submit" value="Crear Reserva" class="btn btn-primary">
+    </form>
+    {% if transaction_data.token %}
+    <button type="button" class="btn btn-outline-dark" id="openModalBtn" style="margin-top: 10px;">Modal de Pago</button>
+    {% endif %}
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="paymentModalLabel">Realizar pago</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{ transaction_data.url }}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="token_ws" value="{{ transaction_data.token }}">
+                    <input type="submit" value="Pagar" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if transaction_data.token %}
+<script>
+    $(document).ready(function () {
+        $('#openModalBtn').click(function () {
+            $('#paymentModal').modal('show');
+        });
+    });
+</script>
+{% endif %}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+        var diasReservados = {{dias_reservados_json | safe}};
+
+        $(".datepicker").datepicker({
+            minDate: "+1d",
+            maxDate: "+2w",
+            dateFormat: "dd/mm/yy",
+            beforeShowDay: function (date) {
+                var disabledDates = diasReservados; // Usar el JSON aquí
+                var dateString = $.datepicker.formatDate("dd/mm/yy", date);
+                return [disabledDates.indexOf(dateString) === -1];
+            },
+
+            currentText: "Hoy", // Texto para el botón de hoy
+            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ], // Nombres de los meses en español
+            monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct",
+                "Nov", "Dic"
+            ], // Nombres cortos de los meses en español
+            dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
+                "Sábado"
+            ], // Nombres de los días en español
+            dayNamesMin: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie",
+                "Sáb"
+            ], // Nombres cortos de los días en español
+            firstDay: 1 // Primer día de la semana (0 - Domingo, 1 - Lunes, etc.)
+        });
+
+        var today = new Date();
+        $(".datepicker").datepicker("setDate", today);
+    });
+
+
+</script>
+
+{% endblock %}

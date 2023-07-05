@@ -1,0 +1,24 @@
+<!-- Asegúrate de tener jQuery cargado en tu plantilla -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Agrega este script en tu plantilla -->
+<script>
+$(document).ready(function() {
+  // Obtén las fechas reservadas del atributo de datos
+  var reservedDates = $('[data-reserved-dates]').data('reserved-dates');
+
+  // Itera sobre las fechas reservadas y agrega una clase CSS especial a los días correspondientes en el calendario
+  reservedDates.forEach(function(date) {
+    var formattedDate = moment(date).format('YYYY-MM-DD');
+    $('input[type="date"][value="' + formattedDate + '"]').addClass('reserved-day');
+  });
+});
+</script>
+
+<!-- Estilos CSS personalizados -->
+<style>
+.reserved-day {
+  background-color: #FF0000; /* Cambia el color a tu gusto */
+  color: #FFFFFF; /* Cambia el color del texto a tu gusto */
+}
+</style>

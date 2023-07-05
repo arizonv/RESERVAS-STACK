@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+registro | {{ block.super }}
+{% endblock %}
+
+{% block container %}
+  <style>
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .login-form form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1abc9c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form button[type="submit"]:hover {
+            background-color: #16a085;
+        }
+    </style>
+
+    <div class="container">
+        <div class="login-form">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}
+index | {{ block.super }}
+{% endblock %}
+
+{% block container %}
+
+<body class="body">
+    <div class="container">
+        <h1>Bienvenido {{user.username}}</h1>
+        <br>
+        <ol class="breadcrumb">
+            <li><a href="#">Início</a></li>
+        </ol>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="list-group">
+                    <a  class="list-group-item active">Mi cuenta</a>
+                    <a href="{% url 'accounts:update_user'%}" class="list-group-item">modificar usuario</a>
+                    <a href="{% url 'accounts:update_password'%}" class="list-group-item">modificar contraseña</a>
+                    <!-- ################## datos que vienen desde modelo cliente  ################## -->
+                    <!-- ################ actualizar datos del cliente ######## -->
+                    <a href="{% url 'client:cliente_create' %}" class="list-group-item"> datos complementarios </a>
+                    <a href="{% url 'client:listar_reservas_usuario' %}" class="list-group-item">Mis reservas</a>
+                    <br>
+                    {% if request.user.is_staff or request.user.is_superuser %}
+                    <!-- ################## datos que vienen desde modelo servicio  ################## -->
+                    <a href="#" class="list-group-item">Agendas</a>
+                    <a href="#" class="list-group-item">servicios</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                 <!-- ################## listas servicios , reservas , agendas  ################## -->
+                {% block accounts_container %}<h2>Bienvenido {{ user.name }} </h2>{% endblock %}
+            </div>
+        </div>
+</body>
+
+{% endblock %}

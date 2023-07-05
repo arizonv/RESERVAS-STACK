@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Reserva | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% block head %}
+
+{% endblock %}
+
+{% block container %}
+
+<h1>Confirmación de transacción</h1>
+<p>Estado: {{ transaction_data.status }}</p>
+<p>Código de autorización: {{ transaction_data.authorization_code }}</p>
+<p>Monto: {{ transaction_data.amount }}</p>
+    
+{% endblock %}
+
+
+

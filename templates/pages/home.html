@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home/home.css' %}" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    type="text/css">
+{% endblock %}
+
+{% block container %}
+<div class="owl-carousel">
+    <div class="item active">
+        <img src="https://via.placeholder.com/800x300" alt="imagen 1">
+        <div class="carousel-caption">
+            <h3>Imagen 1</h3>
+            <p>Descripción de la imagen 1.</p>
+        </div>
+    </div>
+    <div class="item">
+        <img src="https://via.placeholder.com/800x300" alt="imagen 2">
+        <div class="carousel-caption">
+            <h3>Imagen 2</h3>
+            <p>Descripción de la imagen 2.</p>
+        </div>
+    </div>
+    <div class="item">
+        <img src="https://via.placeholder.com/800x300" alt="imagen 3">
+        <div class="carousel-caption">
+            <h3>Imagen 3</h3>
+            <p>Descripción de la imagen 3.</p>
+        </div>
+    </div>
+</div>
+
+<div class="nosotros">
+    <h2>Sobre nosotros</h2>
+    <p>Texto descriptivo sobre tu empresa o proyecto.</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            items: 1,
+            loop: true,
+            margin: 0,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true
+        });
+    });
+</script>
+{% endblock %}

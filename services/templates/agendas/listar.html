@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Agendas | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/services/agendas.css' %}" type="text/css">
+{% endblock %}
+
+{% block container %}
+
+<!-- Tipos de Canchas -->
+<div class="tipos-cancha">
+  <h1>Listado de Agendas</h1>
+  <div class="card-tipos">
+    {% for tipo in tipos_cancha %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ tipo.nombre }}</h5>
+          <a href="#" class="card-link" data-toggle="modal" data-target="#canchasModal{{ tipo.id }}">Ver Canchas</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal para mostrar las canchas correspondientes a un tipo -->
+{% for tipo in tipos_cancha %}
+  <div class="modal" id="canchasModal{{ tipo.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Canchas - {{ tipo.nombre }}</h5>
+          <div data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="card-deck">
+            {% for cancha in tipo.canchas.all %}
+              <div class="card-canchas">
+                <div class="card-body">
+                  <h5 class="card-title">Cancha N°{{ cancha.numeracion }}</h5>
+                  <a href="#" class="card-link" data-toggle="modal" data-target="#horariosModal{{ cancha.id }}">Ver Horarios</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- Submodal para mostrar los horarios de una cancha -->
+{% for tipo, canchas_agendas in agendas_por_cancha.items %}
+  {% for cancha, agendas in canchas_agendas.items %}
+    <div class="modal" id="horariosModal{{ cancha.id }}">
+      <div class="modal-dialog-agenda">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Horarios - {{ cancha }}</h5>
+            <div data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </div>
+          </div>
+          <div class="modal-body">
+            <ul>
+              {% for agenda in agendas %}
+                <li><a href="{% url 'client:crear_reserva' agenda_id=agenda.id %}" >{{ agenda.cancha.tipo}} / {{ agenda.horario }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}
