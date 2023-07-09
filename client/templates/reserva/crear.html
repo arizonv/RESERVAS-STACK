@@ -42,7 +42,7 @@ Reserva | {{ block.super }}
             <label for="{{ form.dia.id_for_label }}">Día: <i class="far fa-calendar-alt"><span> (Presiona aqui para
                         elegir el dia)</span></i><br>{{ form.dia }}</label>
         </div>
-        <input type="submit" value="Crear Reserva" class="btn btn-primary">
+        <input type="submit" value="Crear Reserva" class="btn btn-outline-dark" {% if transaction_data.token %}disabled{% endif %}>
     </form>
     {% if transaction_data.token %}
     <button type="button" class="btn btn-outline-dark" id="openModalBtn" style="margin-top: 10px;">Modal de Pago</button>
@@ -61,7 +61,7 @@ Reserva | {{ block.super }}
                 <form action="{{ transaction_data.url }}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="token_ws" value="{{ transaction_data.token }}">
-                    <input type="submit" value="Pagar" class="btn btn-primary" {% if transaction_data.token %}disabled{% endif %}>
+                    <input type="submit" value="Pagar" class="btn btn-primary">
                 </form>
             </div>
         </div>
