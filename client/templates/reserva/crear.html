@@ -61,7 +61,7 @@ Reserva | {{ block.super }}
                 <form action="{{ transaction_data.url }}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="token_ws" value="{{ transaction_data.token }}">
-                    <input type="submit" value="Pagar" class="btn btn-primary">
+                    <input type="submit" value="Pagar" class="btn btn-primary" {% if transaction_data.token %}disabled{% endif %}>
                 </form>
             </div>
         </div>
