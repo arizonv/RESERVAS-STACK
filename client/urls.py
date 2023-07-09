@@ -19,7 +19,7 @@ urlpatterns = [
     path('reserva/crear/<int:agenda_id>/', views.crear_reserva, name='crear_reserva'),
 
     path('create-transaction/', create_transaction, name='create_transaction'),
-    path('confirm-transaction/<str:token>/', confirm_transaction, name='confirm_transaction'),
+    path('confirm-transaction/', confirm_transaction, name='confirm_transaction'),
 ]
 
 

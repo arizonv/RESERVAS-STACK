@@ -12,6 +12,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente
 from .forms import ClienteForm
 
+import json
+import requests
+
 #cliente
 
 def cliente_list(request):
@@ -90,49 +93,6 @@ def listar_reservas_usuario(request):
     return render(request, 'reserva/listar_reservas_usuario.html', {'reservas': reservas})
 
 
-
-# @login_required(login_url='login')
-# def crear_reserva(request, agenda_id):
-#     agenda = get_object_or_404(Agenda, id=agenda_id)
-#     form = ReservaForm(initial={'agenda': agenda})
-
-#     try:
-#         cliente = request.user.cliente
-#     except Cliente.DoesNotExist:
-#         messages.warning(request, 'Necesitas los DATOS COMPLEMENTARIOS para realizar una reserva')
-#         return redirect(to='client:cliente_create')
-
-#     if request.method == 'POST':
-#         form = ReservaForm(request.POST)
-#         if form.is_valid():
-#             reserva = form.save(commit=False)
-#             reserva.agenda = agenda
-#             reserva.cliente = cliente
-#             # Check if a reservation already exists for the agenda and selected date
-#             if Reserva.objects.filter(agenda=agenda, dia=reserva.dia).exists():
-#                 messages.error(request, 'La fecha ya está reservada.')
-#             else:
-#                 reserva.save()
-#                 messages.success(request, 'Reserva Exitosa!')
-#                 return redirect(to='home')
-
-#     dias_reservados = Reserva.objects.filter(agenda__cancha=agenda.cancha, agenda__horario=agenda.horario).values_list('dia', flat=True)
-#     dias_reservados_str = ', '.join([dia.strftime('%d/%m/%Y') for dia in dias_reservados])
-#     dias_reservados_json = json.dumps(dias_reservados_str)
-
-#     contexto = {
-#         'form': form,
-#         'agenda': agenda,
-#         'dias_reservados_json': dias_reservados_json,
-#     }
-#     return render(request, 'reserva/crear.html', contexto)
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-import json
-import requests
-
 @login_required(login_url='login')
 def crear_reserva(request, agenda_id):
     agenda = get_object_or_404(Agenda, id=agenda_id)
@@ -153,9 +113,8 @@ def crear_reserva(request, agenda_id):
             if Reserva.objects.filter(agenda=agenda, dia=reserva.dia).exists():
                 messages.error(request, 'La fecha ya está reservada.')
             else:
-                reserva.save()
-                messages.success(request, 'Reserva Exitosa!')
-
+                reserva_session = request.session['reserva'] = reserva
+                print(f'reserva actual: {reserva_session}')
                 # Lógica para crear una transacción en Transbank
                 url = 'https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions'
                 headers = {
@@ -173,7 +132,7 @@ def crear_reserva(request, agenda_id):
                     "buy_order": buy_order,
                     "session_id": session_id,
                     "amount": int(amount),
-                    "return_url": "http://www.comercio.cl/webpay/retorno"
+                    "return_url": "http://127.0.0.1:8000/clientes/confirm-transaction/"
                 }
 
                 response = requests.post(url, headers=headers, json=data)

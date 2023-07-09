@@ -13,10 +13,15 @@ Reserva | {{ block.super }}
 
 <h1>Confirmación de transacción</h1>
 <p>Estado: {{ transaction_data.status }}</p>
-<p>Código de autorización: {{ transaction_data.authorization_code }}</p>
 <p>Monto: {{ transaction_data.amount }}</p>
-    
+<p>Buy Order: {{ transaction_data.buy_order }}</p>
+<p>Session ID: {{ transaction_data.session_id }}</p>
+<p>Número de tarjeta: {{ transaction_data.card_detail.card_number }}</p>
+<p>Fecha de transacción: {{ transaction_data.transaction_date }}</p>
+<p>Código de autorización: {{ transaction_data.authorization_code }}</p>
+<p>Tipo de pago: {{ transaction_data.payment_type_code }}</p>
+
+
+
+
 {% endblock %}
-
-
-
