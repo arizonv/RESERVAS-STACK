@@ -5,12 +5,13 @@ Reserva | {{ block.super }}
 {% endblock %}
 
 {% load static %}
-{% block head %}
-<link rel="stylesheet" href="{% static 'styles.css' %}">
+
+{% block container %}
 <style>
     .card {
         max-width: 300px;
         margin: 0 auto;
+        margin-top: 50px;
         padding: 20px;
         background-color: #ffffff;
         border-radius: 5px;
@@ -29,9 +30,7 @@ Reserva | {{ block.super }}
         color: #666666;
     }
 </style>
-{% endblock %}
 
-{% block container %}
 <div class="card">
     <h1>Confirmación de transacción</h1>
     <p>Estado: {{ transaction_data.status }}</p>

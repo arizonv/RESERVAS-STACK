@@ -1,8 +1,12 @@
 :root {
-    --card-width: 300px; /* Ancho de las tarjetas */
-    --card-height: 120px; /* Alto de las tarjetas */
-    --primary-color: #fd5b5b; /* Color primario  */
-    --primary-hover-color: #f83636; /* Color primario al pasar el cursor  */
+    --card-width: 300px;
+    /* Ancho de las tarjetas */
+    --card-height: 120px;
+    /* Alto de las tarjetas */
+    --primary-color: #fd5b5b;
+    /* Color primario  */
+    --primary-hover-color: #f83636;
+    /* Color primario al pasar el cursor  */
 }
 
 /* Estilos para la x de close */
@@ -189,4 +193,24 @@
 
 /* Otros estilos */
 
-/* Ajusta aquí otros estilos según tus necesidades */
+
+@media (max-width: 500px) {
+    .modal-content {
+        width: 100%;
+        /* Ancho del contenido del modal en dispositivos móviles */
+    }
+
+    .modal-dialog,
+    .modal-dialog-agenda {
+        max-width: 100%;
+        /* Ancho máximo del modal en dispositivos móviles */
+        min-width: unset;
+        /* Ancho mínimo del modal en dispositivos móviles */
+        margin-top: 50px;
+        /* Margen superior reducido del modal en dispositivos móviles */
+    }
+
+    /* Ajusta aquí otros estilos según tus necesidades */
+}
+
+/* Estilos posteriores ... */
