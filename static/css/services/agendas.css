@@ -1,9 +1,9 @@
-/* Otros estilos */
 :root {
     --card-width: 300px; /* Ancho de las tarjetas */
     --card-height: 120px; /* Alto de las tarjetas */
+    --primary-color: #fd5b5b; /* Color primario  */
+    --primary-hover-color: #f83636; /* Color primario al pasar el cursor  */
 }
-  
 
 /* Estilos para la x de close */
 .modal-header [data-dismiss="modal"] {
@@ -25,10 +25,10 @@
 .card-tipos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centro horizontal */
+    justify-content: center;
+    /* Centro horizontal */
     gap: 20px;
 }
-  
 
 .card-deck {
     display: flex;
@@ -46,16 +46,13 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     overflow: hidden;
-    margin-bottom: 20px; /* Espacio inferior entre tarjetas */
+    margin-bottom: 20px;
+    /* Espacio inferior entre tarjetas */
 }
-  
 
 .card-canchas:hover {
     transform: translateY(-5px);
 }
-
-
-
 
 .card {
     width: var(--card-width);
@@ -65,9 +62,9 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     overflow: hidden;
-    margin-bottom: 20px; /* Espacio inferior entre tarjetas */
+    margin-bottom: 20px;
+    /* Espacio inferior entre tarjetas */
 }
-  
 
 .card:hover {
     transform: translateY(-5px);
@@ -85,24 +82,21 @@
 
 .card-link {
     display: inline-block;
-    margin-top: 5px;
+    margin-top: 10px;
     padding: 8px 16px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    background-color: #f35413;
+    background-color: var(--primary-color);
     color: #fff;
-    border-radius: 20px;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .card-link:hover {
-    background-color: #e24b11;
+    background-color: var(--primary-hover-color);
 }
-
-
-
 
 /* Estilos para los modales */
 .modal {
@@ -117,6 +111,14 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal-content {
+    width: 700px;
+}
+
+#modal-content-horarios {
+    width: 400px;
+}
+
 .modal-dialog {
     margin: auto;
     margin-top: 100px;
@@ -125,7 +127,6 @@
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 .modal-dialog-agenda {
     text-align: center;
@@ -183,15 +184,8 @@
 }
 
 .modal-body ul li a:hover {
-    color: #f35413;
+    color: var(--primary-color);
 }
-
-
-
-
-
-
-
 
 /* Otros estilos */
 

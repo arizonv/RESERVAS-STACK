@@ -59,7 +59,7 @@ Agendas | {{ block.super }}
   {% for cancha, agendas in canchas_agendas.items %}
     <div class="modal" id="horariosModal{{ cancha.id }}">
       <div class="modal-dialog-agenda">
-        <div class="modal-content">
+        <div id="modal-content-horarios"   class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Horarios - {{ cancha }}</h5>
             <div data-dismiss="modal" aria-label="Close">
