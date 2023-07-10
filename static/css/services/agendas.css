@@ -193,24 +193,32 @@
 
 /* Otros estilos */
 
-
-@media (max-width: 500px) {
+@media screen and (max-width: 767px) {
     .modal-content {
-        width: 100%;
-        /* Ancho del contenido del modal en dispositivos móviles */
+      width: 90%;
     }
-
+  
+    #modal-content-horarios {
+      width: 90%;
+    }
+  
     .modal-dialog,
     .modal-dialog-agenda {
-        max-width: 100%;
-        /* Ancho máximo del modal en dispositivos móviles */
-        min-width: unset;
-        /* Ancho mínimo del modal en dispositivos móviles */
-        margin-top: 50px;
-        /* Margen superior reducido del modal en dispositivos móviles */
+      margin-top: 50px;
+      max-width: 90%;
+      min-width: unset;
     }
-
-    /* Ajusta aquí otros estilos según tus necesidades */
-}
-
-/* Estilos posteriores ... */
+  
+    .modal-header h5 {
+      font-size: 20px;
+    }
+  
+    .modal-header [data-dismiss="modal"] {
+      font-size: 20px;
+    }
+  
+    .modal-body ul li a {
+      padding: 6px;
+    }
+  }
+  
