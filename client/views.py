@@ -14,6 +14,10 @@ from .forms import ClienteForm
 
 import json
 import requests
+from django.conf import settings
+
+import random
+import string
 
 #cliente
 
@@ -115,6 +119,10 @@ def crear_reserva(request, agenda_id):
             else:
                 reserva_session = request.session['reserva'] = reserva
                 print(f'reserva actual: {reserva_session}')
+
+                # Construir la URL de retorno
+                return_url = f"{settings.BASE_URL}clientes/confirm-transaction/"
+
                 # Lógica para crear una transacción en Transbank
                 url = 'https://webpay3gint.transbank.cl/rswebpaytransaction/api/webpay/v1.2/transactions'
                 headers = {
@@ -123,8 +131,10 @@ def crear_reserva(request, agenda_id):
                     'Content-Type': 'application/json'
                 }
 
-                # Obtener datos de la reserva
-                buy_order = '00-' + str(reserva.id).zfill(8) # ID de la reserva
+                # Generar un número de orden de compra aleatorio único de 15 dígitos
+                digits = string.digits
+                buy_order = "00-" + ''.join(random.choice(digits) for _ in range(13))
+
                 session_id = str(request.session.session_key)  # ID de sesión actual
                 amount = agenda.cancha.tipo.precio/2  # Precio de la cancha
 
@@ -132,7 +142,7 @@ def crear_reserva(request, agenda_id):
                     "buy_order": buy_order,
                     "session_id": session_id,
                     "amount": int(amount),
-                    "return_url": "http://127.0.0.1:8000/clientes/confirm-transaction/"
+                    "return_url": return_url
                 }
 
                 response = requests.post(url, headers=headers, json=data)

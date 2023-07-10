@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import socket
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -99,6 +101,12 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
+
+BASE_URL = 'https://arizonv-glorious-space-garbanzo-qg6q4jpw94xc4gqg-8000.preview.app.github.dev/'
+
+if socket.gethostname() == 'localhost':
+    BASE_URL = 'http://localhost:8000/'
 
 
 # Database
