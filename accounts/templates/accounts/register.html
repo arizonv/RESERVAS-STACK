@@ -10,17 +10,7 @@ registro | {{ block.super }}
 {% endblock %}
 
 {% block container %}
-<style>
-    .error-message {
-  color: red;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
 
-.error-message span {
-  display: block;
-}
-</style>
 <div class="wrapper">
     <div id="formContent">
         <h2>Registro de Usuario</h2>
@@ -54,7 +44,10 @@ registro | {{ block.super }}
                 </div>
             {% endif %}
             <label for="password1">Contraseña:</label>
+            <div class="password-container">
             {{ form.password1 }}
+            <span class="password-toggle"><i class="fas fa-eye"></i></span>
+            </div>
             {% if form.password1.errors %}
                 <div class="error-message">
                     {% for error in form.password1.errors %}
@@ -63,7 +56,10 @@ registro | {{ block.super }}
                 </div>
             {% endif %}
             <label for="password2">Confirmar contraseña:</label>
+            <div class="password-container">
             {{ form.password2 }}
+            <span class="password-toggle"><i class="fas fa-eye"></i></span>
+            </div>
             {% if form.password2.errors %}
                 <div class="error-message">
                     {% for error in form.password2.errors %}
@@ -75,4 +71,24 @@ registro | {{ block.super }}
         </form>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script>
+$(document).ready(function() {
+  $('.password-toggle').click(function() {
+    var passwordInput = $(this).prev('input');
+    var passwordFieldType = passwordInput.attr('type');
+
+    if (passwordFieldType === 'password') {
+      passwordInput.attr('type', 'text');
+      $(this).find('i').removeClass('fa-eye').addClass('fa-eye-slash');
+    } else {
+      passwordInput.attr('type', 'password');
+      $(this).find('i').removeClass('fa-eye-slash').addClass('fa-eye');
+    }
+  });
+});
+</script>
+
 {% endblock %}

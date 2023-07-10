@@ -6,12 +6,38 @@
     height: 100vh;
 }
 
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.password-container .password-toggle {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.password-container .password-toggle .fas {
+    margin-left: 15px; 
+    
+}
+
+
 #formContent {
     background-color: #f6f6f6;
     padding: 30px;
     width: 400px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+  
+.error-message span {
+    display: block;
 }
 
 h2 {

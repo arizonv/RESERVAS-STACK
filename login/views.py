@@ -49,13 +49,14 @@ class LoginView(FormView):
                     return response
                 else:
                     messages.error(self.request, 'No se pudo autenticar al usuario')
-                    logger.error('autenticacion de usuario')
+                    logger.error('Autenticación de usuario')
             except ValueError:
-                messages.error(self.request, 'Error en la respuesta de la API de login')
-                logger.error('Error API login')
+                messages.error(self.request, 'Error en la respuesta de la API de inicio de sesión')
+                logger.error('Error en la API de inicio de sesión')
         else:
             messages.error(self.request, 'No se pudo iniciar sesión. Por favor, intenta de nuevo más tarde.')
             logger.error('Credenciales incorrectas')
+
         return redirect('Login:login')
 
 

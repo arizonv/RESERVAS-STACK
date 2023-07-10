@@ -6,9 +6,9 @@ from django.core.exceptions import ValidationError
 
 class UserAdminCreationForm(UserCreationForm):
     # Añade las clases de estilo de Bootstrap a los widgets del formulario
-    username = forms.CharField(max_length=15)
+    username = forms.CharField(max_length=20)
     name = forms.CharField(max_length=20)
-    email = forms.EmailField(max_length=20)
+    email = forms.EmailField(max_length=40)
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
 
@@ -30,7 +30,12 @@ class UserAdminCreationForm(UserCreationForm):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise ValidationError('Este correo electrónico ya está en uso.')
+
+        if not re.match(r'^[\w\.-]+@(gmail\.com|yahoo\.com|outlook\.com)$', email):
+            raise ValidationError('El correo electrónico debe ser de tipo @gmail.com, @yahoo.com, @outlook.com')
+
         return email
+
 
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
