@@ -43,7 +43,7 @@ def crear_cliente(request):
                 cliente = form.save(commit=False)
                 cliente.user = request.user
                 cliente.save()
-                return redirect('agendas:tipo_cancha_listar')
+                return redirect('agendas:agenda-reserva')
         except Exception as e:
             error_message = str(e)
             form.add_error(None, error_message)

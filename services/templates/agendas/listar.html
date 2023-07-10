@@ -5,6 +5,8 @@ Agendas | {{ block.super }}
 {% endblock %}
 
 {% load static %}
+{% load humanize %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/services/agendas.css' %}" type="text/css">
 {% endblock %}
@@ -17,14 +19,28 @@ Agendas | {{ block.super }}
   <div class="card-tipos">
     {% for tipo in tipos_cancha %}
       <div class="card">
+        <a href="{% url 'agendas:agenda-reserva'%}">
+          {% if tipo.nombre == "Futbolito" %}
+            <img src="https://dummyimage.com/600x400/000/fff" alt="Imagen de la cancha de futbolito">
+          {% elif tipo.nombre == "Paddel" %}
+            <img src="https://dummyimage.com/600x400/000/fff" alt="Imagen de la cancha de paddel">
+          {% elif tipo.nombre == "Cross" %}
+            <img src="https://dummyimage.com/600x400/000/fff" alt="Imagen de la cancha de paddel">
+          {% else %}
+            <img src="https://dummyimage.com/600x400/000/fff" alt="Imagen predeterminada">
+          {% endif %}
+        </a>
         <div class="card-body">
-          <h5 class="card-title">{{ tipo.nombre }}</h5>
-          <a href="#" class="card-link" data-toggle="modal" data-target="#canchasModal{{ tipo.id }}">Ver Canchas</a>
+          <h1>{{ tipo.nombre }} (<span>${{ tipo.precio|intcomma }}</span>)</h1>
+
+          <p>{{ tipo.descripcion }}</p>
+          <a href="#" class="card-link btn btn-outline-dark" data-toggle="modal" data-target="#canchasModal{{ tipo.id }}">Ver Canchas</a>
         </div>
       </div>
     {% endfor %}
   </div>
 </div>
+
 
 <!-- Modal para mostrar las canchas correspondientes a un tipo -->
 {% for tipo in tipos_cancha %}
@@ -34,7 +50,7 @@ Agendas | {{ block.super }}
         <div class="modal-header">
           <h5 class="modal-title">Canchas - {{ tipo.nombre }}</h5>
           <div data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span id="close-modal" aria-hidden="true">&times;</span>
           </div>
         </div>
         <div class="modal-body">
@@ -43,7 +59,7 @@ Agendas | {{ block.super }}
               <div class="card-canchas">
                 <div class="card-body">
                   <h5 class="card-title">Cancha N°{{ cancha.numeracion }}</h5>
-                  <a href="#" class="card-link" data-toggle="modal" data-target="#horariosModal{{ cancha.id }}">Ver Horarios</a>
+                  <a href="#" class="card-link btn btn-outline-dark" data-toggle="modal" data-target="#horariosModal{{ cancha.id }}">Ver Horarios</a>
                 </div>
               </div>
             {% endfor %}
@@ -63,7 +79,7 @@ Agendas | {{ block.super }}
           <div class="modal-header">
             <h5 class="modal-title">Horarios - {{ cancha }}</h5>
             <div data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+              <span id="close-modal" aria-hidden="true">&times;</span>
             </div>
           </div>
           <div class="modal-body">

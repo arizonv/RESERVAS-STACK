@@ -1,28 +1,36 @@
-:root {
-    --card-width: 300px;
-    /* Ancho de las tarjetas */
-    --card-height: 120px;
-    /* Alto de las tarjetas */
-    --primary-color: #fd5b5b;
-    /* Color primario  */
-    --primary-hover-color: #f83636;
-    /* Color primario al pasar el cursor  */
+/* Estilos generales */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Estilos para la x de close */
-.modal-header [data-dismiss="modal"] {
-    cursor: pointer;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
 }
 
-/* Estilos para el listado de Agendas */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Tipos de Canchas */
+
 .tipos-cancha {
     text-align: center;
-    padding: 20px;
+    margin-bottom: 40px;
 }
 
 .tipos-cancha h1 {
     font-size: 32px;
-    font-weight: bold;
     margin-bottom: 20px;
 }
 
@@ -30,147 +38,138 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* Centro horizontal */
-    gap: 20px;
-}
-
-.card-deck {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
-}
-
-.card-canchas {
-    text-align: center;
-    width: 200px;
-    height: 110px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    overflow: hidden;
-    margin-bottom: 20px;
-    /* Espacio inferior entre tarjetas */
-}
-
-.card-canchas:hover {
-    transform: translateY(-5px);
 }
 
 .card {
-    width: var(--card-width);
-    height: var(--card-height);
+    width: 400px; /* Ajusta el ancho deseado */
+    height: 345px; /* Ajusta la altura deseada */
+    min-width: 300px;
+    margin: 10px;
     background-color: #fff;
-    border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 20px;
-    /* Espacio inferior entre tarjetas */
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.card a {
+    display: block;
 }
+
+.card img {
+    width: 100%;
+    height: 180px; /* Ajusta la altura proporcionalmente */
+}
+
 
 .card-body {
     padding: 20px;
 }
 
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
+.card h1 {
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
+.card h1 span {
+    color: #c00;
+}
+
+.card p {
+    margin-bottom: 20px;
+}
+
 .card-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: bold;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
-    background-color: var(--primary-color);
-    color: #fff;
-    border-radius: 5px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .card-link:hover {
-    background-color: var(--primary-hover-color);
+    background-color: #000;
+    color: #fff;
 }
 
-/* Estilos para los modales */
+/* Modales */
+
 .modal {
     display: none;
     position: fixed;
-    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
-    width: 700px;
-}
-
-#modal-content-horarios {
-    width: 400px;
+#close-modal {
+    cursor: pointer;
+    font-size: 30px; /* Tamaño de fuente más grande */
+    line-height: 1; /* Ajuste opcional para el espaciado vertical */
 }
 
 .modal-dialog {
-    margin: auto;
-    margin-top: 100px;
+    margin: 20px auto;
     max-width: 600px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.modal-dialog-agenda {
-    text-align: center;
-    margin: auto;
-    margin-top: 100px;
-    max-width: 350px;
-    min-width: 350px;
+.modal-content {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid #eaeaea;
+    padding: 20px;
+    background-color: #f5f5f5;
 }
 
-.modal-header h5 {
+.modal-title {
     font-size: 24px;
-    font-weight: bold;
     margin: 0;
-}
-
-.modal-header [data-dismiss="modal"] {
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
 }
 
 .modal-body {
     padding: 20px;
 }
 
+.modal-body .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.card-canchas {
+    width: 300px;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.modal-dialog-agenda {
+    margin: 80px auto;
+    max-width: 800px;
+}
+
+/* Submodal */
+
+#modal-content-horarios {
+    padding: 20px;
+}
+
 .modal-body ul {
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style-type: none;
 }
 
 .modal-body ul li {
@@ -179,46 +178,10 @@
 
 .modal-body ul li a {
     text-decoration: none;
-    color: #333;
+    color: #000;
     transition: color 0.3s ease;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 8px;
-    display: inline-block;
 }
 
 .modal-body ul li a:hover {
-    color: var(--primary-color);
+    color: #c00;
 }
-
-/* Otros estilos */
-
-@media screen and (max-width: 767px) {
-    .modal-content {
-      width: 90%;
-    }
-  
-    #modal-content-horarios {
-      width: 90%;
-    }
-  
-    .modal-dialog,
-    .modal-dialog-agenda {
-      margin-top: 50px;
-      max-width: 90%;
-      min-width: unset;
-    }
-  
-    .modal-header h5 {
-      font-size: 20px;
-    }
-  
-    .modal-header [data-dismiss="modal"] {
-      font-size: 20px;
-    }
-  
-    .modal-body ul li a {
-      padding: 6px;
-    }
-  }
-  

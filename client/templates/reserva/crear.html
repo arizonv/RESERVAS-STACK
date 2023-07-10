@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 
+{% load static %}
+{% load humanize %}
+
 {% block title %}
 Reserva | {{ block.super }}
 {% endblock %}
 
-{% load static %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/reserva/reserva.css' %}" type="text/css">
 <!-- Incluye jQuery -->
@@ -34,7 +37,7 @@ Reserva | {{ block.super }}
     <h2>Información de la Agenda</h2>
     <p>Cancha: N°{{ agenda.cancha.numeracion }}</p>
     <p>Horario: {{ agenda.horario }}</p>
-    <p>Precio: ${{ agenda.cancha.tipo.precio }}</p>
+    <p>Precio: ${{ agenda.cancha.tipo.precio|intcomma}}</p> 
     {% comment %} <p>Disponible: {% if agenda.disponible %}Sí{% else %}No{% endif %}</p> {% endcomment %}
     <form method="post" class="reserva-form">
         {% csrf_token %}
@@ -86,39 +89,44 @@ Reserva | {{ block.super }}
 
 
 <script>
-    $(document).ready(function () {
-        var diasReservados = {{dias_reservados_json | safe}};
+   $(document).ready(function () {
+    var diasReservados = {{dias_reservados_json | safe}};
 
-        $(".datepicker").datepicker({
-            minDate: "+1d",
-            maxDate: "+2w",
-            dateFormat: "dd/mm/yy",
-            beforeShowDay: function (date) {
-                var disabledDates = diasReservados; // Usar el JSON aquí
-                var dateString = $.datepicker.formatDate("dd/mm/yy", date);
-                return [disabledDates.indexOf(dateString) === -1];
-            },
-
-            currentText: "Hoy", // Texto para el botón de hoy
-            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-                "Septiembre", "Octubre", "Noviembre", "Diciembre"
-            ], // Nombres de los meses en español
-            monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct",
-                "Nov", "Dic"
-            ], // Nombres cortos de los meses en español
-            dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
-                "Sábado"
-            ], // Nombres de los días en español
-            dayNamesMin: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie",
-                "Sáb"
-            ], // Nombres cortos de los días en español
-            firstDay: 1 // Primer día de la semana (0 - Domingo, 1 - Lunes, etc.)
-        });
-
-        var today = new Date();
-        $(".datepicker").datepicker("setDate", today);
+    $(".datepicker").datepicker({
+        minDate: "+1d",
+        maxDate: "+2w",
+        dateFormat: "dd/mm/yy",
+        beforeShowDay: function (date) {
+            var disabledDates = diasReservados; // Usar el JSON aquí
+            var dateString = $.datepicker.formatDate("dd/mm/yy", date);
+            
+            // Verificar si es domingo y deshabilitar
+            if (date.getDay() === 0) {
+                return [false];
+            }
+            
+            return [disabledDates.indexOf(dateString) === -1];
+        },
+        
+        currentText: "Hoy",
+        monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+            "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ],
+        monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct",
+            "Nov", "Dic"
+        ],
+        dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes",
+            "Sábado"
+        ],
+        dayNamesMin: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie",
+            "Sáb"
+        ],
+        firstDay: 1
     });
 
+    var today = new Date();
+    $(".datepicker").datepicker("setDate", today);
+});
 
 </script>
 

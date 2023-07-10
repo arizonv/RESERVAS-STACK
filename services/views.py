@@ -62,37 +62,6 @@ class TipoCanchaDeleteView(DeleteView):
 
 
 ############# agenda ############################
-class TipoCanchaListView(ListView):
-    model = TipoCancha
-    template_name = 'agendas/tipos.html'
-    context_object_name = 'tipos_cancha'
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('Login:login')
-
-        try:
-            cliente = request.user.cliente
-        except Cliente.DoesNotExist:
-            messages.warning(request, 'Necesitas los DATOS COMPLEMENTARIOS para realizar una reserva')
-            return redirect('client:cliente_create')
-
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_queryset(self):
-        # Obtiene todos los objetos de TipoCancha
-        queryset = super().get_queryset()
-        tipos_cancha = TipoCancha.objects.all()
-        tipos_unicos = []
-        # Filtra los tipos de cancha para obtener una lista de tipos únicos
-        for tipo in tipos_cancha:
-            if tipo not in tipos_unicos:
-                tipos_unicos.append(tipo)
-        # Devuelve la lista de tipos únicos
-        return tipos_unicos
-
-
-
 class AgendaListView(ListView):
     model = TipoCancha
     template_name = 'agendas/listar.html'
@@ -129,32 +98,6 @@ class AgendaListView(ListView):
 
         return context
 
-
-# @login_required(login_url='login')
-# class AgendaListView(ListView):
-#     model = TipoCancha
-#     template_name = 'agendas/listar.html'
-#     context_object_name = 'tipos_cancha'
-    
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#         agendas_por_cancha = {}
-
-#         current_date = timezone.now().date()
-
-#         for tipo in context['tipos_cancha']:
-#             canchas = Cancha.objects.filter(tipo=tipo)
-#             agendas_por_cancha[tipo] = {}
-
-#             for cancha in canchas:
-#                 agendas = Agenda.objects.filter(cancha=cancha, disponible=True)
-#                 agendas_por_cancha[tipo][cancha] = agendas
-
-#         context['agendas_por_cancha'] = agendas_por_cancha
-
-#         return context
 
 
 
