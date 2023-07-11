@@ -2,7 +2,6 @@
 
 {% block accounts_container %}
 
-
 <style>
   /* Estilos para el contenedor principal */
   .container {
@@ -70,6 +69,13 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
       </div>
     </div>
+    {% for field in form %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
   </form>
 </div>
 
