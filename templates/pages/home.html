@@ -83,7 +83,7 @@ Home | {{ block.super }}
                 contadorNumero++;
                 $('#contador-somos').text(contadorNumero);
 
-                if (contadorNumero < 1000) {
+                if (contadorNumero < 1001) {
                     intervalo = setTimeout(aumentarContador, 30); // Ajusta la velocidad aquí (en milisegundos)
                 }
             }
@@ -110,12 +110,7 @@ Home | {{ block.super }}
         });
 
 
-     
-
-
-
-       
-
+    
         $('.servicios.owl-carousel').owlCarousel({
             items: 1,
             loop: true,
