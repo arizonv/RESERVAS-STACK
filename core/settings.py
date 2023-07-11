@@ -104,7 +104,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-BASE_URL = 'https://arizonv-glorious-space-garbanzo-qg6q4jpw94xc4gqg-8000.preview.app.github.dev/'
+BASE_URL = 'https://arizonv-obscure-space-guide-wjx75pgw9963w7q-8000.preview.app.github.dev/'
 
 if socket.gethostname() == 'localhost':
     BASE_URL = 'http://localhost:8000/'
