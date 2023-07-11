@@ -70,36 +70,21 @@
     margin-bottom: 10px;
 }
 
-@keyframes contador-animation {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 .contador {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 30px;
-    animation: contador-animation 2s linear infinite;
 }
 
 .contador h2 {
     display: inline-block;
     font-size: 40px;
     margin-right: 10px;
-    animation: contador-animation 2s linear infinite;
 }
 
 #contador-somos {
     font-size: 60px;
     font-weight: bold;
-    animation: contador-animation 2s linear infinite;
 }
 
 /* Estilos para dispositivos móviles */

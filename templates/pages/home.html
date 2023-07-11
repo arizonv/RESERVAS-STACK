@@ -9,6 +9,7 @@ Home | {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/home/home.css' %}" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
     type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 {% endblock %}
 
 {% block container %}
@@ -28,17 +29,14 @@ Home | {{ block.super }}
     </div>
 </div>
 
-<div class="nosotros">
+<div class="nosotros" data-aos="fade-right">
     <h2>Sobre nosotros</h2>
     <p>Texto descriptivo sobre tu empresa o proyecto. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero velit deleniti illo iure molestiae voluptatum fugit sequi harum tempora, eius ipsam dolore alias ut maiores pariatur, nostrum, illum inventore eveniet ducimus! Ullam doloremque eum fugiat accusamus ad provident nostrum esse tempore, delectus voluptatum in pariatur fuga! Expedita eligendi explicabo est beatae cupiditate. Molestiae porro, incidunt inventore odio sint nisi. Quasi voluptatibus laboriosam voluptate cumque soluta magni quae suscipit quia aliquid similique tempore pariatur, dolor recusandae voluptates ad eum. Repellendus sit natus veritatis excepturi maxime at alias aperiam, est porro tempora sint recusandae doloremque illo, dolorem doloribus, possimus fugiat quo nesciunt iusto. Quas dolorum placeat explicabo similique ullam, amet quos voluptates earum vel delectus voluptatem error labore architecto quis! Repellendus sequi quo natus porro, ratione voluptas aliquam officiis ipsum ex harum perspiciatis.</p>
 </div>
 
-<div class="contador">
-    <h1>¡SOMOS!  <span id="contador-somos"> 0...</span></h1>
-    
+<div class="contador" data-aos="fade-up">
+    <h1>Ya somos! <span id="contador-somos">0..</span> registrados :)</h1>
 </div>
-
-
 
 <div class="servicios owl-carousel">
     <div class="item">
@@ -60,6 +58,7 @@ Home | {{ block.super }}
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -75,7 +74,8 @@ Home | {{ block.super }}
         });
 
         $(document).ready(function () {
-            var contadorSomos = 0;
+            AOS.init();
+
             var contadorNumero = 0;
             var intervalo;
 
@@ -83,16 +83,9 @@ Home | {{ block.super }}
                 contadorNumero++;
                 $('#contador-somos').text(contadorNumero);
 
-                if (contadorNumero < 1001) {
+                if (contadorNumero < 1000) {
                     intervalo = setTimeout(aumentarContador, 30); // Ajusta la velocidad aquí (en milisegundos)
                 }
-            }
-
-            function reiniciarContador() {
-                contadorSomos = 0;
-                contadorNumero = 0;
-                $('#contador-somos').text(contadorNumero);
-                clearTimeout(intervalo);
             }
 
             $(window).scroll(function () {
@@ -100,17 +93,13 @@ Home | {{ block.super }}
                 var windowHeight = $(window).height();
                 var scrollTop = $(window).scrollTop();
 
-                if (scrollTop + windowHeight > nosotrosTop && contadorSomos === 0) {
-                    contadorSomos++;
+                if (scrollTop + windowHeight > nosotrosTop && contadorNumero === 0) {
+                    contadorNumero++;
                     aumentarContador();
-                } else if (scrollTop + windowHeight < nosotrosTop) {
-                    reiniciarContador();
                 }
             });
         });
 
-
-    
         $('.servicios.owl-carousel').owlCarousel({
             items: 1,
             loop: true,
@@ -123,5 +112,4 @@ Home | {{ block.super }}
         });
     });
 </script>
-
 {% endblock %}
