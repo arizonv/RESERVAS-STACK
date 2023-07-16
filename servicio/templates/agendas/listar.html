@@ -15,10 +15,12 @@ Servicios | {{ block.super }}
 
 <div class="container">
   <br>
+  <a href="{% url 'servicio:agenda-agregar' %}" class="btn btn-outline-dark">Agregar Nueva Agenda</a>
+  <br>
+  <hr>
   <div class="card">
     <div class="card-header">
       Agendas disponibles
-      <a href="{% url 'servicio:agenda-agregar' %}" class="btn btn-primary float-right">Agregar Nueva Agenda</a>
     </div>
     <div class="card-body">
       <table class="table">
