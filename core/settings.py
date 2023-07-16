@@ -46,7 +46,7 @@ DJANGO_APPS = [
     'django.contrib.humanize',
 ]
 
-LOCAL_APPS = ['accounts','login','services','client',]
+LOCAL_APPS = ['accounts','login','servicio','cliente',]
 
 API_REST = ['api',]
 
@@ -103,11 +103,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
-BASE_URL = 'https://arizonv-obscure-space-guide-wjx75pgw9963w7q-8000.preview.app.github.dev/'
-
-if socket.gethostname() == 'localhost':
-    BASE_URL = 'http://localhost:8000/'
 
 
 # Database
@@ -175,15 +170,5 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
-import threading
-from services import cron
-
-def start_cron():
-    cron.run_schedule()
-
-cron_thread = threading.Thread(target=start_cron)
-cron_thread.daemon = True
-cron_thread.start()
 
 

@@ -58,13 +58,13 @@
     margin-top: 0;
 }
 
-.servicios {
+.servicio {
     background-color: #f9f9f9;
     padding: 40px;
     text-align: center;
 }
 
-.servicios h3 {
+.servicio h3 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -90,7 +90,7 @@
 /* Estilos para dispositivos móviles */
 @media (max-width: 767px) {
     .nosotros,
-    .servicios {
+    .servicio {
         padding: 20px;
     }
 
@@ -102,7 +102,7 @@
         font-size: 16px;
     }
 
-    .servicios h3 {
+    .servicio h3 {
         font-size: 18px;
     }
 }

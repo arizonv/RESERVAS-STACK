@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+List | {{ block.super }}
+{% endblock %}
+
+{% block container %}
+<div class="container">
+  <br>
+  <br>
+  <div class="card">
+    <div class="card-header">
+      <h1 class="card-title">User List</h1>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <!-- Agrega los enlaces para las acciones de edición y eliminación -->
+              <a href="{% url 'account:update_admin' user.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'account:user_delete' user.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

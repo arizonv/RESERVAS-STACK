@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Servicios | {{ block.super }}
+{% endblock %}
+
+{% load static %}
+{% load humanize %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block container %}
+
+<div class="container">
+  <br>
+  <div class="card">
+    <div class="card-header">
+      Canchas disponibles
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Numeración</th>
+            <th>Tipo de Cancha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cancha in canchas %}
+          <tr>
+            <td>{{ cancha.numeracion }}</td>
+            <td>{{ cancha.tipo }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="2">No hay canchas disponibles.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

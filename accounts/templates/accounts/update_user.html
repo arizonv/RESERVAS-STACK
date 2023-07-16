@@ -1,73 +1,18 @@
 {% extends 'accounts/index.html' %}
 
 {% block accounts_container %}
-<style>
-  /* Estilos generales */
-  .container {
-    margin-top: 20px;
-  }
-
-  h1 {
-    margin-bottom: 20px;
-  }
-
-  /* Estilos del formulario */
-  .form-horizontal {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  label {
-    font-weight: bold;
-  }
-
-  input[type="text"],
-  input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  /* Estilos del botón */
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .btn-primary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
-  }
-
-  .btn-primary:focus,
-  .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  }
-</style>
-
 
 <div class="container">
-  <form class="form-horizontal" action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <div class="form-group">
-      <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-primary">guardar</button>
-      </div>
+  <br>
+  <div class="card">
+    <div class="card-header">
+      Usuario
     </div>
-  </form>
+    <div class="card-body">
+      {{form}}
+      <a type="submit" class="btn btn-primary">Guardar</a>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

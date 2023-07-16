@@ -12,29 +12,32 @@
                 </li>
                 {% if user.is_staff or user.is_superuser %}
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Agendas</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'servicio:agenda-listar' %}">Agendas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Servicios</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'servicio:cancha-listar' %}">Servicios</a>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Tipos servicios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'client:reserva_list' %}">Clientes/Reservas</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'cliente:reserva_list' %}">Clientes/Reservas</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link disabled" aria-current="page">||</a>
                 </li>
                 
+             
+                {% if user.is_authenticated and not user.is_staff and not user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'servicio:agenda-reserva' %}">Reserva</a>
+                </li>
+                {% endif %}
+
                 {% if user.is_authenticated %}
                 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'agendas:agenda-reserva' %}">Reserva</a>
-                </li>
+                
                 <li class="nav-item"> 
-                    <a class="nav-link" href="{% url 'accounts:index' %}">mi cuenta</a>
+                    <a class="nav-link" href="{% url 'account:index' %}">Mi cuenta</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Login:logout' %}">Logout</a>
@@ -47,7 +50,7 @@
                     <a class="nav-link" href="{% url 'Login:login' %}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'accounts:register' %}">Registro</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'account:register' %}">Registro</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">ARIZONA</a>

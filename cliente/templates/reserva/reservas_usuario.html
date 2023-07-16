@@ -1,0 +1,18 @@
+{% extends "accounts/index.html" %}
+
+{% block accounts_container %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Reservas</h5>
+    <ul class="list-group">
+      {% for reserva in reservas %}
+        <li class="list-group-item">
+            <span>Cancha: N°{{ reserva.agenda.cancha.numeracion }}</span> / {{ reserva.agenda.cancha.tipo.nombre }} {{ reserva.dia }}
+        </li>
+      {% empty %}
+        <li class="list-group-item">No hay reservas</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
